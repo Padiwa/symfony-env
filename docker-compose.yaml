@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+    symfony5:
+        container_name: symfony5
+        build: symfony5
+        ports:
+            - "9000:8000"
+        volumes:
+            - ./project:/var/www/html
+
+
+    database:
+        image: postgres:13-alpine
+        environment:
+            POSTGRES_DB: app
+            POSTGRES_PASSWORD: ChangeMe
+            POSTGRES_USER: symfony
+        volumes:
+            - db-data:/var/lib/postgresql/data:rw
+        ports:
+            - "5432"
+
+volumes:
+  db-data:
